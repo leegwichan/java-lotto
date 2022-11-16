@@ -4,15 +4,15 @@ import device.input.Input;
 import device.output.Output;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoShop;
-import lotto.message.InputRequestMessage;
 import lotto.reward.RewardCoordinator;
 import lotto.setting.LottoApplicationSetting;
+import lotto.view.InputView;
 import lotto.winningnumber.WinningNumber;
 import java.util.List;
 
 public class LottoApplication {
 
-    private final Input input;
+    private final InputView inputView;
     private final Output output;
     private final LottoApplicationSetting setting;
 
@@ -20,7 +20,7 @@ public class LottoApplication {
     private List<Lotto> lottos;
 
     LottoApplication(Input input, Output output, LottoApplicationSetting setting) {
-        this.input = input;
+        this.inputView = new InputView(input, output);
         this.output = output;
         this.setting = setting;
     }
@@ -39,7 +39,7 @@ public class LottoApplication {
     }
 
     private void buyLotto() {
-        purchasePrice = inputInteger(InputRequestMessage.PURCHASE_AMOUNT);
+        purchasePrice = inputView.readPurchasePrice();
 
         LottoShop lottoShop = setting.createLottoShop();
         lottos = lottoShop.buyLotto(purchasePrice);
@@ -49,22 +49,12 @@ public class LottoApplication {
     }
 
     private void showRewardResult() {
-        List<Integer> winningNumbers = inputIntegerList(InputRequestMessage.WINNING_NUMBER);
-        List<Integer> bonusNumbers = inputIntegerList(InputRequestMessage.BONUS_NUMBER);
+        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        List<Integer> bonusNumbers = inputView.readBonusNumbers();
 
         WinningNumber winningNumber = setting.createWinningNumber(winningNumbers, bonusNumbers);
         RewardCoordinator rewardCoordinator = setting.createRewardCoordinator(winningNumber, purchasePrice);
         String rewardResult = rewardCoordinator.getRewardResult(lottos);
         output.print(rewardResult);
-    }
-
-    private Integer inputInteger(InputRequestMessage message) {
-        output.print(message);
-        return input.enterInteger();
-    }
-
-    private List<Integer> inputIntegerList(InputRequestMessage message) {
-        output.print(message);
-        return input.enterIntegerList();
     }
 }
