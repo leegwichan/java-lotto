@@ -11,7 +11,7 @@
 
 - Lotto
     - [x] Lotto 입력 형식이 올바른지 체크
-      - 입력 형식이 올바르지 않을 경우 `IllegalArgumentException`을 발생
+      - LottoSetting을 통해 입력 형식 확인
     - [x] 현재 가지고 있는 로또 정보를 String 형식으로 전달함
       - 숫자 오름차순 정리 및 양 옆에 대괄호 추가
       - ex) "[1, 2, 3, 4, 5, 6]"
@@ -34,6 +34,7 @@
   - [x] 해당 정보에 따라 객체(LottoRewardCoordinator)를 생성
   - LottoSetting
     - [x] 변경 가능한 정보들을 enum 값으로 담고 있음
+    - [x] 형식이 올바른지 확인하고 올바르지 않으면 `IllegalArgumentException`을 발생
   - WinningNumberSetting
     - [x] 당첨 번호에 대한 정보를 저장하고 있음 (enum)
   - LottoRewardSetting

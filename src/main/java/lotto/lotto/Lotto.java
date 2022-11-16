@@ -13,14 +13,8 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers, LottoSetting setting) {
-        validate(numbers, setting);
+        setting.validate(numbers);
         this.numbers = numbers;
-    }
-
-    private void validate(List<Integer> numbers, LottoSetting setting) {
-        if (!setting.isValidNumbers(numbers)) {
-            throw new IllegalArgumentException(ExceptionMessage.LOTTO_FORM_NOT_MATCHED.getMessage());
-        }
     }
 
     public String getNumbers() {

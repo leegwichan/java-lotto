@@ -2,6 +2,7 @@ package lotto.setting;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.lotto.Lotto;
+import lotto.message.ExceptionMessage;
 import java.util.List;
 
 public enum LottoSetting {
@@ -16,8 +17,16 @@ public enum LottoSetting {
         this.NUMBER_OF_DRAWS = numberOfDraws;
     }
 
-    public boolean isValidNumbers(List<Integer> numbers) {
-        return isSizeMatched(numbers) && isNumberInRange(numbers) && isNotOverlapped(numbers);
+    public void validate(List<Integer> numbers) {
+        if (!isSizeMatched(numbers)) {
+            throwException(ExceptionMessage.LOTTO_SIZE_NOT_MATCHED);
+        }
+        if (!isNumberInRange(numbers)) {
+            throwException(ExceptionMessage.LOTTO_NUMBER_RANGE_OUT);
+        }
+        if (!isNotOverlapped(numbers)) {
+            throwException(ExceptionMessage.LOTTO_NUMBER_OVERLAPPED);
+        }
     }
 
     private boolean isSizeMatched(List<Integer> numbers) {
@@ -34,9 +43,12 @@ public enum LottoSetting {
         return numbers.stream().distinct().count() == NUMBER_OF_DRAWS;
     }
 
+    private void throwException(ExceptionMessage exceptionMessage) {
+        throw new IllegalArgumentException(exceptionMessage.getMessage());
+    }
+
     public Lotto createAutoLotto() {
         List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_OF_DRAWS);
         return new Lotto(randomNumbers,this);
     }
-
 }
