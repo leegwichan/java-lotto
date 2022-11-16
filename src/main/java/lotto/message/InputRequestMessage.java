@@ -14,7 +14,7 @@ public enum InputRequestMessage implements Message {
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return message;
     }
 }

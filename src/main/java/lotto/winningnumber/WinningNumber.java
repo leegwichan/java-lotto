@@ -18,7 +18,7 @@ public class WinningNumber {
 
     private void validate(List<Integer> numbers, List<Integer> bonusNumbers, WinningNumberSetting setting) {
         if (!setting.isValidateNumbers(numbers, bonusNumbers)) {
-            throw new IllegalArgumentException(ExceptionMessage.WINNING_NUMBER_FORM_NOT_MATCHED.toString());
+            throw new IllegalArgumentException(ExceptionMessage.WINNING_NUMBER_FORM_NOT_MATCHED.getMessage());
         }
     }
 

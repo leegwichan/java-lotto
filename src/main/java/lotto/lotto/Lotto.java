@@ -19,7 +19,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers, LottoSetting setting) {
         if (!setting.isValidNumbers(numbers)) {
-            throw new IllegalArgumentException(ExceptionMessage.LOTTO_FORM_NOT_MATCHED.toString());
+            throw new IllegalArgumentException(ExceptionMessage.LOTTO_FORM_NOT_MATCHED.getMessage());
         }
     }
 

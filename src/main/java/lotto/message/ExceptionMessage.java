@@ -15,7 +15,7 @@ public enum ExceptionMessage implements Message {
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return message;
     }
 }

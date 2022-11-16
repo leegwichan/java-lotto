@@ -23,7 +23,7 @@ public class LottoShop {
 
     private int calculateCountOfLotto(int totalPrice) {
         if (totalPrice % price != 0) {
-            throw new IllegalArgumentException(ExceptionMessage.NOT_DIVIDED_PRISE.toString());
+            throw new IllegalArgumentException(ExceptionMessage.NOT_DIVIDED_PRISE.getMessage());
         }
         return totalPrice / price;
     }
