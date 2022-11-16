@@ -9,6 +9,6 @@ public class ConsoleOutput implements Output{
     }
 
     public void print(Message message) {
-        System.out.println(message.toString());
+        System.out.println(message.getMessage());
     }
 }
