@@ -2,17 +2,20 @@ package lotto;
 
 import device.input.Input;
 import device.output.Output;
+import lotto.lotto.dto.LottoListDto;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoShop;
 import lotto.reward.RewardCoordinator;
 import lotto.setting.LottoApplicationSetting;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 import lotto.winningnumber.WinningNumber;
 import java.util.List;
 
 public class LottoApplication {
 
     private final InputView inputView;
+    private final OutputView outputView;
     private final Output output;
     private final LottoApplicationSetting setting;
 
@@ -21,6 +24,7 @@ public class LottoApplication {
 
     LottoApplication(Input input, Output output, LottoApplicationSetting setting) {
         this.inputView = new InputView(input, output);
+        this.outputView = new OutputView(output);
         this.output = output;
         this.setting = setting;
     }
@@ -40,12 +44,10 @@ public class LottoApplication {
 
     private void buyLotto() {
         purchasePrice = inputView.readPurchasePrice();
-
         LottoShop lottoShop = setting.createLottoShop();
-        lottos = lottoShop.buyLotto(purchasePrice);
 
-        String lottosInfo = lottoShop.getLottoInfo(lottos);
-        output.print(lottosInfo);
+        lottos = lottoShop.buyLotto(purchasePrice);
+        outputView.printLottos(new LottoListDto(lottos));
     }
 
     private void showRewardResult() {

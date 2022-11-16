@@ -38,17 +38,4 @@ public class LottoShopTest {
 
         assertThat(result.size() == 5).isEqualTo(true);
     }
-
-    @Test
-    void getLottoInfoTest() {
-        Lotto lotto = mock(Lotto.class);
-        when(lotto.getNumbers()).thenReturn("[1, 2, 3, 4, 5, 6]");
-        List<Lotto> lottos = List.of(lotto, lotto);
-        LottoSetting lottoSetting = mock(LottoSetting.class);
-        String expect = "\n2개를 구매했습니다.\n" +
-                "[1, 2, 3, 4, 5, 6]" +
-                "[1, 2, 3, 4, 5, 6]";
-
-        String result = new LottoShop(1000, lottoSetting).getLottoInfo(lottos);
-    }
 }

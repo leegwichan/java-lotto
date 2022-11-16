@@ -1,9 +1,8 @@
 package lotto.lotto;
 
-import lotto.message.ExceptionMessage;
+import lotto.lotto.dto.LottoDto;
 import lotto.setting.LottoSetting;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -17,10 +16,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public String getNumbers() {
-        return numbers.stream().sorted()
-                .map(number -> String.valueOf(number))
-                .collect(Collectors.joining(", ","[","]"));
+    public LottoDto getLottoDto() {
+        return new LottoDto(List.copyOf(numbers));
     }
 
     public boolean isInNumbers(int number) {

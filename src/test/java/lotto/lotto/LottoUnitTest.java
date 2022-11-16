@@ -37,17 +37,6 @@ public class LottoUnitTest {
     }
 
     @Test
-    void getNumbersTest() {
-        LottoSetting lottoSetting = mock(LottoSetting.class);
-        Lotto lotto = new Lotto(List.of(6,5,4,3,2,1), lottoSetting);
-        String excepted = "[1, 2, 3, 4, 5, 6]";
-
-        String result = lotto.getNumbers();
-
-        assertThat(result).isEqualTo(excepted);
-    }
-
-    @Test
     void isInNumberTest_expectedTrue() {
         LottoSetting lottoSetting = mock(LottoSetting.class);
         Lotto lotto = new Lotto(List.of(6,5,4,3,2,1), lottoSetting);

@@ -35,13 +35,4 @@ public class LottoShop {
         }
         return lottos;
     }
-
-    public String getLottoInfo(List<Lotto> lottos) {
-        String lottosInfo = lottos.stream()
-                .map(lotto -> lotto.getNumbers())
-                .collect(Collectors.joining("\n"));
-
-        return "\n" + lottos.size() + "개를 구매했습니다."
-                + lottosInfo;
-    }
 }
