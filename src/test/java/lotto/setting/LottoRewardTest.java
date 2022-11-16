@@ -12,29 +12,6 @@ import java.util.stream.Stream;
 
 public class LottoRewardTest {
 
-    @DisplayName("getRewardInfoTest")
-    @ParameterizedTest(name = "{displayName} Case {index}")
-    @ArgumentsSource(RewardInfoTestData.class)
-    void getRewardInfoTest(LottoReward lottoReward, String expected) {
-        String result = lottoReward.getRewardInfo();
-
-        assertThat(result).isEqualTo(expected);
-    }
-
-    static class RewardInfoTestData implements ArgumentsProvider {
-
-        @Override
-        public Stream<? extends Arguments> provideArguments(ExtensionContext context) throws Exception {
-            return Stream.of(
-                    Arguments.of(LottoReward.FIRST, "6개 일치 (2,000,000,000원)"),
-                    Arguments.of(LottoReward.SECOND, "5개 일치, 보너스 볼 일치 (30,000,000원)"),
-                    Arguments.of(LottoReward.THIRD, "5개 일치 (1,500,000원)"),
-                    Arguments.of(LottoReward.FOURTH, "4개 일치 (50,000원)"),
-                    Arguments.of(LottoReward.FIFTH, "3개 일치 (5,000원)")
-            );
-        }
-    }
-
     @DisplayName("isSatisfyMatchingConditionTest")
     @ParameterizedTest(name = "{displayName} Case {index}")
     @ArgumentsSource(SatisfyMatchingConditionTestData.class)

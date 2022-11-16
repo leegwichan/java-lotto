@@ -6,6 +6,7 @@ import lotto.lotto.dto.LottoListDto;
 import lotto.lotto.Lotto;
 import lotto.lotto.LottoShop;
 import lotto.reward.RewardCoordinator;
+import lotto.reward.dto.RewardDto;
 import lotto.setting.LottoApplicationSetting;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -56,7 +57,7 @@ public class LottoApplication {
 
         WinningNumber winningNumber = setting.createWinningNumber(winningNumbers, bonusNumbers);
         RewardCoordinator rewardCoordinator = setting.createRewardCoordinator(winningNumber, purchasePrice);
-        String rewardResult = rewardCoordinator.getRewardResult(lottos);
-        output.print(rewardResult);
+        RewardDto rewardDto = rewardCoordinator.getRewardDto(lottos);
+        outputView.printRewardResult(rewardDto);
     }
 }

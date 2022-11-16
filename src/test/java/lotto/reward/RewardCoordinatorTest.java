@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import lotto.lotto.Lotto;
+import lotto.reward.dto.RewardDto;
 import lotto.setting.LottoReward;
 import lotto.winningnumber.WinningNumber;
 import org.junit.jupiter.api.Test;
@@ -18,27 +19,23 @@ public class RewardCoordinatorTest {
         WinningNumber winningNumber = mock(WinningNumber.class);
         List<LottoReward> rewards = mockLottoRewards();
         List<Lotto> lottos = mockLottos();
-        String excepted = "\n당첨 통계\n---\n" +
-                "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개\n" +
-                "6개 일치 (2,000,000,000원) - 1개\n" +
-                "총 수익률은 200.0%입니다.";
+        double exceptedRatio = 4000L / 2000 * 100;
 
-        String result = new RewardCoordinator(winningNumber, rewards, 2000).getRewardResult(lottos);
+        RewardDto result = new RewardCoordinator(winningNumber, rewards, 2000).getRewardDto(lottos);
 
-        assertThat(result).isEqualTo(excepted);
+        assertThat(result.getPriceRatio()).isEqualTo(exceptedRatio);
+        assertThat(result.getRewardResult().size()).isEqualTo(1);
     }
 
     List<LottoReward> mockLottoRewards() {
         LottoReward mockLottoReward = mock(LottoReward.class);
         when(mockLottoReward.isSatisfyMatchingCondition(anyInt(), anyInt())).thenReturn(false, true, true);
-        when(mockLottoReward.getRewardInfo()).thenReturn( "5개 일치, 보너스 볼 일치 (30,000,000원)", "6개 일치 (2,000,000,000원)");
         when(mockLottoReward.getPrize()).thenReturn(2000L);
-        return List.of(mockLottoReward, mockLottoReward);
+        return List.of(mockLottoReward);
     }
 
     List<Lotto> mockLottos() {
-        Lotto mock1 = mock(Lotto.class);
-        Lotto mock2 = mock(Lotto.class);
-        return List.of(mock1, mock2);
+        Lotto mockLotto = mock(Lotto.class);
+        return List.of(mockLotto, mockLotto, mockLotto);
     }
 }
